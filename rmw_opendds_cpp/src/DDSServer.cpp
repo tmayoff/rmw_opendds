@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "rmw_opendds_cpp/qos.hpp"
+#include <dds/DdsDcpsCoreC.h>
+#include <dds/DdsDcpsSubscriptionC.h>
 #include <rmw_opendds_cpp/DDSServer.hpp>
 #include <rmw_opendds_cpp/identifier.hpp>
 
@@ -74,6 +77,23 @@ bool DDSServer::remove_from(OpenDDSNode * dds_node)
   }
   return false;
 }
+
+rmw_ret_t DDSServer::subscription_get_actual_qos(rmw_qos_profile_t* qos) {
+  DDS::DataReaderQos dds_qos;
+  reader_->get_qos(dds_qos);
+
+  dds_qos_to_rmw_qos(dds_qos, *qos);
+  return RMW_RET_OK;
+}
+
+rmw_ret_t DDSServer::publisher_get_actual_qos(rmw_qos_profile_t* qos) {
+  DDS::DataWriterQos dds_qos;
+  writer_->get_qos(dds_qos);
+
+  dds_qos_to_rmw_qos(dds_qos, *qos);
+  return RMW_RET_OK;
+}
+
 
 DDSServer::DDSServer(const rosidl_service_type_support_t * ts
   , const char * service_name

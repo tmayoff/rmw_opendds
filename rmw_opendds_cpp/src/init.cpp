@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <dds/DCPS/debug.h>
 #include <rmw_opendds_cpp/RmwAllocateFree.hpp>
 #include <rmw_opendds_cpp/init.hpp>
 
@@ -24,6 +25,7 @@ rmw_context_impl_t::rmw_context_impl_s() : dpf_(TheParticipantFactory) {
   if (dpf_) {
     TheServiceParticipant->set_default_discovery(
         OpenDDS::DCPS::Discovery::DEFAULT_RTPS);
+    OpenDDS::DCPS::log_level = OpenDDS::DCPS::LogLevel::Debug;
   } else {
     const char *msg = "failed to get participant factory";
     RMW_SET_ERROR_MSG(msg);

@@ -15,6 +15,7 @@
 #ifndef RMW_OPENDDS_CPP__DDSSERVER_HPP_
 #define RMW_OPENDDS_CPP__DDSSERVER_HPP_
 
+#include <rmw/types.h>
 #include <rmw_opendds_cpp/Service.hpp>
 #include <rmw_opendds_cpp/OpenDDSNode.hpp>
 #include <rmw_opendds_cpp/RmwAllocateFree.hpp>
@@ -33,6 +34,9 @@ public:
   const std::string& service_name() const { return service_.name(); }
   void * replier() const { return replier_; }
   DDS::ReadCondition_var read_condition() const { return read_condition_; }
+
+  rmw_ret_t subscription_get_actual_qos(rmw_qos_profile_t* qos);
+  rmw_ret_t publisher_get_actual_qos(rmw_qos_profile_t* qos);
 
 private:
   friend Raf;

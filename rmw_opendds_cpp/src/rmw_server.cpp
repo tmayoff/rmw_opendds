@@ -116,11 +116,15 @@ rmw_service_request_subscription_get_actual_qos(
   const rmw_service_t * service,
   rmw_qos_profile_t * qos)
 {
-  (void) service;
-  (void) qos;
-  // Unused in current implementation.
-  RMW_SET_ERROR_MSG("unimplemented");
-  return RMW_RET_ERROR;
+  auto dds_server = DDSServer::from(service);
+  if (!dds_server)
+    return RMW_RET_INVALID_ARGUMENT;
+
+  auto ret = dds_server->subscription_get_actual_qos(qos);
+  if (ret != RMW_RET_OK)
+    return ret;
+  
+  return RMW_RET_OK;
 }
 
 rmw_ret_t
@@ -128,10 +132,14 @@ rmw_service_response_publisher_get_actual_qos(
   const rmw_service_t * service,
   rmw_qos_profile_t * qos)
 {
-  (void) service;
-  (void) qos;
-  // Unused in current implementation.
-  RMW_SET_ERROR_MSG("unimplemented");
+  auto dds_server = DDSServer::from(service);
+  if (!dds_server)
+    return RMW_RET_INVALID_ARGUMENT;
+
+  auto ret = dds_server->publisher_get_actual_qos(qos);
+  if (ret != RMW_RET_OK)
+    return ret;
+
   return RMW_RET_ERROR;
 }
 
