@@ -78,20 +78,18 @@ bool DDSServer::remove_from(OpenDDSNode * dds_node)
   return false;
 }
 
-rmw_ret_t DDSServer::subscription_get_actual_qos(rmw_qos_profile_t* qos) {
+void DDSServer::subscription_get_actual_qos(rmw_qos_profile_t* qos) {
   DDS::DataReaderQos dds_qos;
   reader_->get_qos(dds_qos);
 
   dds_qos_to_rmw_qos(dds_qos, *qos);
-  return RMW_RET_OK;
 }
 
-rmw_ret_t DDSServer::publisher_get_actual_qos(rmw_qos_profile_t* qos) {
+void DDSServer::publisher_get_actual_qos(rmw_qos_profile_t* qos) {
   DDS::DataWriterQos dds_qos;
   writer_->get_qos(dds_qos);
 
   dds_qos_to_rmw_qos(dds_qos, *qos);
-  return RMW_RET_OK;
 }
 
 

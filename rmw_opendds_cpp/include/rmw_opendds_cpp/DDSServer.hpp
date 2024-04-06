@@ -35,8 +35,8 @@ public:
   void * replier() const { return replier_; }
   DDS::ReadCondition_var read_condition() const { return read_condition_; }
 
-  rmw_ret_t subscription_get_actual_qos(rmw_qos_profile_t* qos);
-  rmw_ret_t publisher_get_actual_qos(rmw_qos_profile_t* qos);
+  void subscription_get_actual_qos(rmw_qos_profile_t* qos);
+  void publisher_get_actual_qos(rmw_qos_profile_t* qos);
 
 private:
   friend Raf;

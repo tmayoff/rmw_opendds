@@ -120,10 +120,8 @@ rmw_service_request_subscription_get_actual_qos(
   if (!dds_server)
     return RMW_RET_INVALID_ARGUMENT;
 
-  auto ret = dds_server->subscription_get_actual_qos(qos);
-  if (ret != RMW_RET_OK)
-    return ret;
-  
+  dds_server->subscription_get_actual_qos(qos);
+
   return RMW_RET_OK;
 }
 
@@ -136,11 +134,9 @@ rmw_service_response_publisher_get_actual_qos(
   if (!dds_server)
     return RMW_RET_INVALID_ARGUMENT;
 
-  auto ret = dds_server->publisher_get_actual_qos(qos);
-  if (ret != RMW_RET_OK)
-    return ret;
+  dds_server->publisher_get_actual_qos(qos);
 
-  return RMW_RET_ERROR;
+  return RMW_RET_OK;
 }
 
 rmw_ret_t
